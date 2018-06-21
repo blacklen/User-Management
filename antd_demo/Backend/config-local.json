@@ -1,0 +1,6 @@
+{
+    "mongoPath": "mongodb://localhost:27017/usermanagement",
+    "sessionSecret": "len",
+    "secureCookie": false
+  }
+  

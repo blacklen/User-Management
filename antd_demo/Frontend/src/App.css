@@ -1,0 +1,44 @@
+@import '~antd/dist/antd.css';
+
+#components-form-demo-normal-login{
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+#components-form-demo-normal-login .login-form-forgot {
+  float: right;
+}
+#components-form-demo-normal-login .login-form-button {
+  width: 100%;
+}
+#register-form{
+  max-width: 800px;
+  margin : 0 15%;
+  text-align: center;
+}
+#register-form h1,#err {
+    position: relative;
+    left: 15%;
+}
+#components-form-demo-normal-login #err2{
+  position: absolute;
+  left: 40%;
+}
+#screen{
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+#screen .ant-btn{
+  margin: 2% 2%;
+}
+
+#input{
+  max-width: 100px;
+  position: relative;
+}
+
+#manage{
+  position: relative;
+  right: 0;
+}
