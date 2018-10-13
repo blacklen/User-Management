@@ -9,7 +9,6 @@ class header extends Component {
         return (
             <div>
                 <div id="header">
-                    <Navbar />
                     <div className="logo">
                         <div>
                             <img className="blinkyLogo" src={blinkyImage} />
@@ -18,7 +17,6 @@ class header extends Component {
                             <img className='mascot' src={cuteImage} />
                         </div>
                     </div>
-                    <div className="func" style={{ fontFamily: "sans serif", marginTop: "10px" }}>Split it</div>
                 </div>
             </div>
         );

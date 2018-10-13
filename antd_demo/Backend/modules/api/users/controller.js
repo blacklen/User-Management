@@ -91,21 +91,21 @@ const updateDataBefore = (id, dataBefore) =>
       .catch(err => reject(err));
   });
 
-  const update = (data) =>
+  const update = (data) =>{
   new Promise((resolve, reject) => {
     userModel
-      .update(
+      .updateOne(
         {
           _id: data._id
         },
         {
-          listEvent: data.listEvent
+          $set: {listEvent : data.listEvent}
         }
       )
       .exec()
       .then(data => resolve(data))
       .catch(err => reject(err));
-  });
+  });}
 
 const filter = ({values, filter})=>{
 		if(filter=="")	return values;

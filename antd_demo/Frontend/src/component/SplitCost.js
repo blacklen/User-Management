@@ -20,37 +20,30 @@ class SplitCost extends Component {
         });
       }
     
-      handleOk = (e) => {
-        
-        this.setState({
-          visible: false,
-        });
+      handleOk = async (e) => {
         let data = this.state.data;
         data.listEvent.push({
             name : this.state.name,
             friends: this.state.payments
         })
-        console.log(data);
-        // axios
-        // .put(`/api/users`,{
-        //     _id: data._id,
-        //     name: this.state.name,
-        //     friends: this.state.payments.map((doc)=>{
-        //         return doc;
-        //     })
-        // })
-        // .then(data => {
-        // })
-        // .catch(err => console.log(err));
+        let ab = data;
+        for(let i of ab.listEvent){
+            for(let e of i.friends){
+              e.friend = e.friend._id
+            }
+          }
         fetch(`http://localhost:6969/api/users`, {
             method: "PUT",
             headers: new Headers({
               'Content-Type': 'application/json',
             }),
             body : JSON.stringify({
-                ...data
+                ...ab
             })
           }).then(res => res.json());
+
+          this.setState({ visible: false });
+          window.location.reload(true);
       }
     
       handleCancel = (e) => {
@@ -83,14 +76,12 @@ class SplitCost extends Component {
                 }
             }
         }
+        
         this.setState({listFriend : checkedValues,payments: items})
       }
       changeInput=(e)=>{
           this.setState({name: e.target.value})
       }
-      onChangeCarousel(a) {
-      
-        }
       
 
     componentWillMount() {
@@ -105,10 +96,23 @@ class SplitCost extends Component {
           .catch(err => console.log(err));
       }
 
+      redirect = () => {
+        this.props.history.push(`/detail?id=${this.state.data._id}`);
+      }
     renderCard = (data)=>{
         let render = data && data.listEvent ? data.listEvent.map((doc)=>{
             return (
-                <Card payments={this.state.payments} name = {doc.name} friends = {doc.friends} data = {this.state.data}/>
+                <div className="col-md">
+                <div className="card" style={{ width: "300px", height: "300px", textAlign: "center", fontSize: "20px" }}>
+                    <img style ={{  height : 159, marginLeft:76, width: 143}} className="card-img-top" src={Cat} alt="Card image cap" />
+                    <div className="card-body">
+                        <h5 className="card-title">{doc.name}</h5>
+                        <p className="card-text">{doc.friends.map((doc)=> doc.friend.fullName + " ")}</p>
+                        <Button onClick={this.redirect}>Details</Button>
+                    </div>
+                </div>
+
+            </div>
             )
         }) : [];
         render.push(

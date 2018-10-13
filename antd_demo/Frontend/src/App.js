@@ -6,6 +6,8 @@ import Screen from './component/Screen';
 import Login from './component/Login';
 import Register from './component/Register';
 import SplitCost from './component/SplitCost';
+import Detail from './component/Detail';
+
 
   class App extends React.Component {
     state = {
@@ -22,6 +24,7 @@ import SplitCost from './component/SplitCost';
                 <Route path="/register" render={(props) => <Register {...props}/>} />
                 <Route path="/register" render={(props) => <Register {...props}/>} />
                 <Route path="/splitCost" render={(props) => <SplitCost {...props}/>} />
+                <Route path="/detail" render={(props) => <Detail {...props}/>} />
                 
             </div>
         </BrowserRouter>

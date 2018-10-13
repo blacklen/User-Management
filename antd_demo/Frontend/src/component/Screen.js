@@ -50,9 +50,6 @@ class Screen extends React.Component {
   let name = this.state.data ? this.state.data.fullName : "";
 	const menu = (
 		<Menu>
-		  <Menu.Item onClick ={e => {this.onClickItem(e.key)} } key="5">5 Item</Menu.Item>
-		  <Menu.Item onClick ={e => {this.onClickItem(e.key)} } key="10">10 Item</Menu.Item>
-		  <Menu.Item onClick ={e => {this.onClickItem(e.key)} } key="15">15 item</Menu.Item>
 		  <Menu.Item onClick={this.onLogOut} key="0">Log Out</Menu.Item>
 		</Menu>
 	  );
@@ -69,7 +66,7 @@ class Screen extends React.Component {
             <img src = {img1} style={{marginTop: "30%"}}/>
             <span style ={{position: "relative"}}>
               <img src = {img2} style = {{width : "54%"}}/>
-              <p style ={{position : "absolute", bottom: "10%" , left: "30%"}}> 
+              <p style ={{position : "absolute", bottom: "-80px" , left: "16%", fontSize: 30}}> 
                 Hello there,{name}
                 <br/>
                 What do you want?

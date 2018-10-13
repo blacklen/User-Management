@@ -70,3 +70,8 @@
 .ant-carousel .slick-slide h3 {
   color: #fff;
 }
+
+.App{
+  background: #3e466af2;
+  height:  100vh;
+}

@@ -13,93 +13,93 @@ class card extends Component {
 
     componentWillMount(){
         this.setState({data: this.props.data})
+        console.log(this.props.data);
     }
 
     showModal = () => {
-        this.setState({
-          visible: true,
-        });
+        this.props.history.push(`/detail?id=${this.props.data._id}`);
       }
 
-      handleOk = (e) => {
-        this.setState({
-          visible: false,
-        });
-        let data = this.props.data;
-        data.listEvent.push({
-            name : this.state.name,
-            friends: this.state.listFriend.map((doc)=>{
-                return {
-                    friend: doc,
-                    paid: 0,
-                    mustPay: 0,
-                    debt: [],
-                    done : false
-                }
-            })
-        })
+    //   handleOk = (e) => {
+    //     this.setState({
+    //       visible: false,
+    //     });
+    //     let data = this.props.data;
+    //     data.listEvent.push({
+    //         name : this.state.name,
+    //         friends: this.state.listFriend.map((doc)=>{
+    //             return {
+    //                 friend: doc,
+    //                 paid: 0,
+    //                 mustPay: 0,
+    //                 debt: [],
+    //                 done : false
+    //             }
+    //         })
+    //     })
         
-        axios
-        .put(`/api/users`,{...data})
-        .then(data => {
-            console.log(data);
-        })
-        .catch(err => console.log(err));
-      }
+    //     axios
+    //     .put(`/api/users`,{...data})
+    //     .then(data => {
+    //         console.log(data);
+    //     })
+    //     .catch(err => console.log(err));
+    //   }
 
-      renderFriend2 = (data)=>{
-        let render = data && data.length > 0 ? data.map((doc)=>{
-            return (
-                <Col span={8}><Checkbox value={doc.friend._id}>{doc.friend.fullName}</Checkbox></Col>
-            )
-        }) : [];
-        return render;
-    }
+    //   renderFriend2 = (data)=>{
+    //     let render = data && data.length > 0 ? data.map((doc)=>{
+    //         return (
+    //             <Col span={8}><Checkbox value={doc.friend._id}>{doc.friend.fullName}</Checkbox></Col>
+    //         )
+    //     }) : [];
+    //     return render;
+    // }
     
-      handleCancel = (e) => {
-        console.log(e);
-        this.setState({
-          visible: false,
-        });
-      }
+    //   handleCancel = (e) => {
+    //     console.log(e);
+    //     this.setState({
+    //       visible: false,
+    //     });
+    //   }
 
-      renderFriend = (data)=>{
-        let render = data && data.listFriend ? data.listFriend.map((doc)=>{
-            return (
-                <Col span={8}><Checkbox checked = {true} value={doc._id}>{doc.fullName}</Checkbox></Col>
-            )
-        }) : [];
-        return render;
-    }
-    renderPayments = (data)=>{
-        let render = data && data.length != 0 ? data.map((doc)=>{
-            return (
-                <div>
-                    <h4>{doc.friend.fullName}</h4>
-                    <Input 
-                        onChange={(e) => this.changePaid(e,doc.friend._id)}  
-                        placeholder="How much did you pay?" 
-                        value = {doc.paid}
-                    />
-                    <Checkbox.Group style={{ width: '100%' }} onChange={e => this.onChangeAttend(e,doc.friend._id)}>
-                        <Row>
-                            {this.renderFriend2(this.state.payments)}
-                        </Row>  
-                    </Checkbox.Group>
-                </div>
-            )
-        }) : [];
-        return render;
-    }
+    //   renderFriend = (data)=>{
+    //     let render = data && data.listFriend ? data.listFriend.map((doc)=>{
+    //         return (
+    //             <Col span={8}><Checkbox checked = {true} value={doc._id}>{doc.fullName}</Checkbox></Col>
+    //         )
+    //     }) : [];
+    //     return render;
+    // }
+    // renderPayments = (data)=>{
+    //     let render = data && data.length != 0 ? data.map((doc)=>{
+    //         return (
+    //             <div>
+    //                 <h4>{doc.friend.fullName}</h4>
+    //                 <Input 
+    //                     onChange={(e) => this.changePaid(e,doc.friend._id)}  
+    //                     placeholder="How much did you pay?" 
+    //                     value = {doc.paid}
+    //                 />
+    //                 <Checkbox.Group style={{ width: '100%' }} onChange={e => this.onChangeAttend(e,doc.friend._id)}>
+    //                     <Row>
+    //                         {this.renderFriend2(this.state.payments)}
+    //                     </Row>  
+    //                 </Checkbox.Group>
+    //             </div>
+    //         )
+    //     }) : [];
+    //     return render;
+    // }
 
-    onChange = (checkedValues)=> {
-        console.log('checked = ', checkedValues);
-        this.setState({listFriend : checkedValues})
-      }
-      changeInput=(e)=>{
-          this.setState({name: e.target.value})
-      }
+    // onChange = (checkedValues)=> {
+    //     console.log('checked = ', checkedValues);
+    //     this.setState({listFriend : checkedValues})
+    //   }
+    //   changeInput=(e)=>{
+    //       this.setState({name: e.target.value})
+    //   }
     render() {
+        console.log("abc",this.props.friends)
         return (
             <div className="col-md">
                 <div className="card" style={{ width: "300px", height: "300px", textAlign: "center", fontSize: "20px" }}>
@@ -111,33 +111,6 @@ class card extends Component {
                     </div>
                 </div>
 
-                <Modal
-                    title="New Event"
-                    visible={this.state.visible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
-                    >
-                        <div>
-                            <h4>Name</h4>
-                            <Input 
-                                onChange={this.changeInput}  
-                                placeholder="Name's Event" 
-                                value = {this.props.name ? this.props.name : this.state.name}    
-                            />
-                        </div>
-                        <div>
-                            <h4>Friends</h4>
-                            <Checkbox.Group style={{ width: '100%' }} onChange={this.onChange}>
-                                <Row>
-                                    {this.renderFriend(this.props.data)}
-                                </Row>  
-                            </Checkbox.Group>
-                        </div>
-                        <div>
-                            <h4> Payments </h4>
-                            {this.renderPayments(this.props.payments)}
-                        </div>
-                </Modal>
             </div>
         );
     }

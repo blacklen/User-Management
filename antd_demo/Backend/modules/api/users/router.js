@@ -3,6 +3,9 @@ const router = express.Router();
 
 const userController = require("./controller");
 const authMiddleware = require("../auth/auth");
+const db = require("mongoose");
+
+const ObjectIdCast = db.Types.ObjectId;
 
 // router.get("/:page", (req, res) => {
 //   userController
@@ -61,14 +64,13 @@ router.put("/:id/data", (req, res) => {
       res.status(500).send(err);
     });
 });
-router.put("/", (req, res) => {
+router.put("/", async (req, res) => {
   userController
     .update(req.body)
     .then(id => {
       res.send(id);
     })
     .catch(err => {
-      console.error(err);
       res.status(500).send(err);
     });
 });
