@@ -30,7 +30,6 @@ class RegisterForm extends React.Component {
       fullName: values.fullName
     })
     .then(res => {
-      console.log(res.data);
       this.setState({id: res.data})
       this.setState({true:1})
     })

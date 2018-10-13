@@ -9,7 +9,7 @@ router.post("/", (req, res) => {
     .then(userInfo => {
       req.session.userInfo = userInfo;
       res.send(userInfo);
-      res.send("Logged in");
+      // res.send("Logged in");
     })
     .catch(error => {
       console.log(error);

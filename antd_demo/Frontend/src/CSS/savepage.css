@@ -1,0 +1,37 @@
+#header{
+    height: 200px;
+    background-color: #007bff;
+    text-align: center;
+}
+
+.accountAndNav {
+    display: flex;
+    justify-content: space-between
+}
+.account{
+    width: 200px;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+}
+.blinkyLogo{
+    width: 150px;
+    height: 100px;
+}
+.mascot{
+    width: 100px;
+    height: 100px;
+}
+.func{
+    
+}
+.nav{
+    margin-right: 20px;
+}
+
+.goalContainer{
+    width: 80%;
+    margin: auto;
+}

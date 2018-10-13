@@ -4,15 +4,15 @@ const router = express.Router();
 const userController = require("./controller");
 const authMiddleware = require("../auth/auth");
 
-router.get("/:page", (req, res) => {
-  userController
-    .getAllUsers(req.params.page || 1,req.query.limit,req.query.direction, req.query.filter)
-    .then(users => res.send(users))
-    .catch(err => {
-      console.error(err);
-      res.status(500).send(err);
-    });
-});
+// router.get("/:page", (req, res) => {
+//   userController
+//     .getAllUsers(req.params.page || 1,req.query.limit,req.query.direction, req.query.filter)
+//     .then(users => res.send(users))
+//     .catch(err => {
+//       console.error(err);
+//       res.status(500).send(err);
+//     });
+// });
 
 router.post("/", (req, res) => {
   userController
@@ -56,6 +56,17 @@ router.put("/:id/data", (req, res) => {
   userController
     .updateUsername(req.params.id, req.body.dataBefore)
     .then(id => res.send(id))
+    .catch(err => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+router.put("/", (req, res) => {
+  userController
+    .update(req.body)
+    .then(id => {
+      res.send(id);
+    })
     .catch(err => {
       console.error(err);
       res.status(500).send(err);

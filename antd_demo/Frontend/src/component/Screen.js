@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "../axios";
 import { Redirect } from "react-router-dom";
 import { Table, Button, Input, Icon, Pagination, Dropdown, Menu} from "antd";
+import img1 from "./1.png";
+import img2 from "./2.png";
 
 class Screen extends React.Component {
   state = {
@@ -20,40 +22,16 @@ class Screen extends React.Component {
 	direction:null
   };
   
-  componentDidMount() {
+  componentWillMount() {
     axios
-      .get(`/api/users/1?limit=5&direction=-createdAt&filter`)
+      .get(`/api/users/${this.props.match.params.id}`)
       .then(data => {
-        this.setState({ data1: data.data });
+        console.log(data);
+        this.setState({ data: data.data });
       })
       .catch(err => console.log(err));
 
-    axios
-      .get("/api/users")
-      .then(data => this.setState({ length: data.data.length }))
-      .catch(err => console.log(err));
   }
-  handleChange = page => {
-    this.setState({ page });
-    axios
-      .get(`/api/users/${page}?limit=${this.state.limit}&direction=${this.state.direction}&filter`)
-      .then(data => this.setState({ data: data.data }))
-      .catch(err => console.log(err));
-  };
-  onChange = (pagination, filters, sorter) => {
-    console.log("Various parameters", pagination, filters, sorter);
-    this.setState({
-      filteredInfo: filters,
-      sortedInfo: sorter
-    });
-  };
-  onInputChange = e => {
-    let filter = e.target.value;
-    let a = axios
-      .get(`/api/users/${this.state.page}?limit=${this.state.limit}&direction=${this.state.direction}&filter=${filter}`)
-      .then(data => this.setState({ data: data.data }))
-      .catch(err => console.log(err));
-  };
 
 	onLogOut = () => {
 		axios
@@ -61,63 +39,15 @@ class Screen extends React.Component {
 		.then(res => this.setState({ logOut: true }))
 		.catch(err => console.log(err));
 	};
-	onClickItem = (item)=>{
-		this.setState({limit:item})
-		axios
-		.get(`/api/users/1?filter&limit=${item}&direction=${this.state.direction}&filter`)
-		.then(data => {
-		  this.setState({ data1: data.data });
-		})
-		.catch(err => console.log(err));
-  }
-  
-  onSort = ()=>{
-    axios
-    .get(`/api/users/${this.state.page}?limit=${this.state.limit}&direction=${this.state.direction}&filter`)
-    .then(data => this.setState({ data: data.data }))
-    .catch(err => console.log(err));
+	
+  handleClick = ()=> {
+    this.props.history.push(`/splitCost?id=${this.props.match.params.id}`);
   }
   render() {
     if (this.state.logOut) {
       return <Redirect to={"/"} />;
     }
-    let { sortedInfo, filteredInfo } = this.state;
-    sortedInfo = sortedInfo || {};
-    filteredInfo = filteredInfo || {};
-    const columns = [
-      {
-        title: "Username",
-        dataIndex: "username",
-        key: "username",
-        sorter: (a, b) => a.username.length - b.username.length,
-        sortOrder: sortedInfo.columnKey === "username" && sortedInfo.order,
-        filterDropdown: (
-          <div className="custom-filter-dropdown">
-            <Input
-              ref={ele => (this.searchInput = ele)}
-              placeholder="Username"
-              onChange={this.onInputChange}
-              onPressEnter={this.onFilter}
-              id="input"
-            />
-          </div>
-        )
-      },
-      {
-        title: "Fullname",
-        dataIndex: "fullName",
-        key: "fullName",
-        sorter: (a, b) => a.fullName.length - b.fullName.length,
-        sortOrder: sortedInfo.columnKey === "fullName" && sortedInfo.order
-      },
-      {
-        title: "Email",
-        dataIndex: "email",
-        key: "email",
-        sorter: (a, b) => a.email.length - b.email.length,
-        sortOrder: sortedInfo.columnKey === "email" && sortedInfo.order
-      }
-	];
+  let name = this.state.data ? this.state.data.fullName : "";
 	const menu = (
 		<Menu>
 		  <Menu.Item onClick ={e => {this.onClickItem(e.key)} } key="5">5 Item</Menu.Item>
@@ -135,29 +65,20 @@ class Screen extends React.Component {
           </Button>
         </Dropdown>
 
-        <h1>List Users </h1>
-        {this.state.data ? (
-          <Table
-            pagination={false}
-            columns={columns}
-            dataSource={this.state.data}
-            onChange={this.onChange}
-          />
-        ) : (
-          <Table
-            columns={columns}
-            pagination={false}
-            dataSource={this.state.data1}
-            onChange={this.onChange}
-          />
-        )}
-        <Pagination
-          style={{ float: "right" }}
-          defaultCurrent={1}
-          pageSize={this.state.limit}
-          total={this.state.length}
-          onChange={this.handleChange}
-        />
+        <div>
+            <img src = {img1} style={{marginTop: "30%"}}/>
+            <span style ={{position: "relative"}}>
+              <img src = {img2} style = {{width : "54%"}}/>
+              <p style ={{position : "absolute", bottom: "10%" , left: "30%"}}> 
+                Hello there,{name}
+                <br/>
+                What do you want?
+                <br/>
+                <Button>Save</Button>
+                <Button onClick = {this.handleClick}>Split Cost</Button>
+              </p>
+            </span>
+        </div>
       </div>
     );
   }

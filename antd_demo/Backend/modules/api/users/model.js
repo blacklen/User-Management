@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
+const db = require("mongoose");
+const ObjectId = db.Schema.Types.ObjectId;
 
 const userModel = new Schema(
   {
@@ -20,7 +22,31 @@ const userModel = new Schema(
     },
     fullName: {type: String,required: true},
     active: { type: Boolean, default: true },
-    dataBefore: []
+    listFriend: [
+      {type: ObjectId, ref: "users"}
+    ],
+    listEvent : [
+      {
+        name: {type: String, default: ""},
+        friends: [
+          {
+            friend: {type: ObjectId,  ref: "users"},
+            paid: {
+              type: Number, default: 0,
+            },
+            attend: [
+              {type: ObjectId, ref: "users"}
+            ],
+            mustPay: {type: Number,default: 0},
+            debt: [
+              {type: ObjectId, ref: "users"}
+            ],
+            done: {type: Boolean, default: false}
+          }
+        ]
+      }
+    ]
+
   },
   { timestamps: { createdAt: "createdAt" } }
 );

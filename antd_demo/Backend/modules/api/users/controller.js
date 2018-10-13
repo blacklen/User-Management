@@ -44,7 +44,9 @@ const getOneUser = id =>
         active: true,
         _id: id
       })
-      .select("_id username fullName email password")
+      .populate('listFriend')
+      .populate('listEvent.friends.friend')
+      .populate('listEvent.friends.attend')
       .exec()
       .then(data =>
         resolve(
@@ -89,9 +91,24 @@ const updateDataBefore = (id, dataBefore) =>
       .catch(err => reject(err));
   });
 
+  const update = (data) =>
+  new Promise((resolve, reject) => {
+    userModel
+      .update(
+        {
+          _id: data._id
+        },
+        {
+          listEvent: data.listEvent
+        }
+      )
+      .exec()
+      .then(data => resolve(data))
+      .catch(err => reject(err));
+  });
+
 const filter = ({values, filter})=>{
 		if(filter=="")	return values;
-		console.log(filter.toUpperCase());
 		const change = [];
 		for (i = 0; i < 5; i++) {
 			console.log(values[i].username.toUpperCase());
@@ -113,5 +130,6 @@ module.exports = {
   getUserForAuth,
   updateDataBefore,
   getUsers,
-  filter
-};
+  filter,
+  update
+}

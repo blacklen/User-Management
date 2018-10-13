@@ -43,8 +43,6 @@ class LoginForm extends React.Component {
   	};
   	render() {
 		if (this.state.true === 1) {
-			console.log(this.state.true);
-			console.log(this.state.id);
 			return <Redirect to= {`/users/${this.state.id}`} />;
 		}
 		const { getFieldDecorator } = this.props.form;
