@@ -177,12 +177,18 @@ class Detail extends Component {
     componentWillMount() {
         const urlParams = new URLSearchParams(this.props.location.search)
         const key = urlParams.get("id")
+        const eventId = urlParams.get("eventId");
         axios
           .get(`/api/users/${key}`)
           .then(data => {
-            console.log(data);
-            this.sum( data.data.listEvent[0].friends);
-            this.setState({ data: data.data.listEvent[0] });
+              for(let doc of data.data.listEvent){
+                  if(doc._id.toString()===eventId.toString()){
+                    this.sum( doc.friends);
+                    this.setState({ data: doc });
+                    break;
+                  }
+              }
+            
           })
           .catch(err => console.log(err));
       }

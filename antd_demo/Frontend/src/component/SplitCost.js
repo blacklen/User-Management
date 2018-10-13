@@ -96,8 +96,8 @@ class SplitCost extends Component {
           .catch(err => console.log(err));
       }
 
-      redirect = () => {
-        this.props.history.push(`/detail?id=${this.state.data._id}`);
+      redirect = (e,id) => {
+        this.props.history.push(`/detail?id=${this.state.data._id}&&eventId=${id}`);
       }
     renderCard = (data)=>{
         let render = data && data.listEvent ? data.listEvent.map((doc)=>{
@@ -108,7 +108,7 @@ class SplitCost extends Component {
                     <div className="card-body">
                         <h5 className="card-title">{doc.name}</h5>
                         <p className="card-text">{doc.friends.map((doc)=> doc.friend.fullName + " ")}</p>
-                        <Button onClick={this.redirect}>Details</Button>
+                        <Button onClick={e =>this.redirect(e,doc._id)}>Details</Button>
                     </div>
                 </div>
 

@@ -22,7 +22,6 @@ import Detail from './component/Detail';
                 <Route exact path="/" render={(props) => <Login />} />
                 <Route path="/users/:id" render={(props) => <Screen {...props} username={this.state.username}/>} />
                 <Route path="/register" render={(props) => <Register {...props}/>} />
-                <Route path="/register" render={(props) => <Register {...props}/>} />
                 <Route path="/splitCost" render={(props) => <SplitCost {...props}/>} />
                 <Route path="/detail" render={(props) => <Detail {...props}/>} />
                 
