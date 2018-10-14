@@ -2,15 +2,11 @@
     height: 200px;
     background-color: #007bff;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around
 }
 
-.accountAndNav {
-    display: flex;
-    justify-content: space-between
-}
-.account{
-    width: 200px;
-}
 
 .logo {
     display: flex;

@@ -101,9 +101,9 @@ class card extends Component {
     render() {
         console.log("abc",this.props.friends)
         return (
-            <div className="col-md">
-                <div className="card" style={{ width: "300px", height: "300px", textAlign: "center", fontSize: "20px" }}>
-                    <img style ={{  height : 159, marginLeft:76, width: 143}} className="card-img-top" src={Cat} alt="Card image cap" />
+            <div className="col-md ">
+                <div className="card border-primary mb-3"  style={{ textAlign: "center", fontSize: "20px" }}>
+                    <img style ={{  height : "159px", borderRadius : "50%"}} className="card-img-top" src={Cat} alt="Card image cap" />
                     <div className="card-body">
                         <h5 className="card-title">{this.props.name}</h5>
                         <p className="card-text">{this.props.friends.map((doc)=> doc.friend.fullName + " ")}</p>

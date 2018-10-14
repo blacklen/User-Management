@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Header from './header.js';
 import Card from './card.js';
 import axios from "../axios";
-import Cat from '../Images/plus.png';
+import Cat from '../Images/cat.jpg';
+import plus from '../Images/plus.png';
+import Navbar from '../component/navbar.js';
 import { Modal, Button,Input, Checkbox, Row, Col, Carousel  } from 'antd';
 const JSON = require('circular-json');
 var util = require('util')
@@ -103,11 +105,11 @@ class SplitCost extends Component {
         let render = data && data.listEvent ? data.listEvent.map((doc)=>{
             return (
                 <div className="col-md">
-                <div className="card" style={{ width: "300px", height: "300px", textAlign: "center", fontSize: "20px" }}>
-                    <img style ={{  height : 159, marginLeft:76, width: 143}} className="card-img-top" src={Cat} alt="Card image cap" />
+                <div className="card border-primary mb-3" style={{ }}>
+                    <img style ={{}} className="card-img-top" src={Cat} alt="Card image cap" />
                     <div className="card-body">
                         <h5 className="card-title">{doc.name}</h5>
-                        <p className="card-text">{doc.friends.map((doc)=> doc.friend.fullName + " ")}</p>
+                        <p className="card-text" style = {{fontSize: 14}}>{doc.friends.map((doc)=> doc.friend.fullName + " ")}</p>
                         <Button onClick={e =>this.redirect(e,doc._id)}>Details</Button>
                     </div>
                 </div>
@@ -118,7 +120,7 @@ class SplitCost extends Component {
         render.push(
             <div className="col-md" onClick={this.showModal}>
                 <div className="card" style={{ width: "300px", height: "300px" }}>
-                    <img className="card-img-top" src={Cat} alt="Card image cap" />
+                    <img className="card-img-top" style={{width: 200, margin: "0 auto", marginTop: 49}} src={plus} alt="Card image cap" />
                 </div>
             </div>)
         return render;
@@ -185,7 +187,8 @@ class SplitCost extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="test">
+                <Navbar history={this.props.history} id={this.state.data ? this.state.data._id : ""}/>
                 <Header />
                 <div className="MainContent">
                     

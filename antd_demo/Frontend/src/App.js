@@ -7,6 +7,7 @@ import Login from './component/Login';
 import Register from './component/Register';
 import SplitCost from './component/SplitCost';
 import Detail from './component/Detail';
+import "./CSS/modal.css";
 
 
   class App extends React.Component {

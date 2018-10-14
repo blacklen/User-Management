@@ -1,0 +1,66 @@
+.modal-content {
+    width : 60%;
+    margin:auto;
+    text-align: center;
+    
+    }
+
+.font-color-blue {
+    color: rgb(67, 108, 255,1);
+}
+
+.blue-content {
+    background-color: rgb(255, 104, 69,1);
+    padding-bottom: 3%;
+}
+
+.normal-content {
+    padding-bottom:3%
+}
+
+.Name-div{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.name {
+    width: 20%;
+    height: 40px;
+    border-style: solid;
+    border-color:rgb(67, 108, 255,1);
+    margin-top: 2%;
+}
+
+.payment-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around
+}
+
+.payment-content {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-style: solid;
+    border-color: rgb(255, 104, 69,1);
+}
+
+.payment-content h3 {
+    padding-bottom: 10%;
+    font-size: 30px;
+    align-self: flex-start;
+}
+
+.payment-content h2 {
+    padding-top: 5%;
+    padding-bottom: 10%;
+    font-size: 20px;
+    align-self: flex-end;
+}
+
+.title {
+    font-size: 40px;
+    padding-bottom: 5%
+}

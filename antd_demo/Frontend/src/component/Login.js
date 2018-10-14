@@ -3,6 +3,7 @@ import axios from "../axios";
 import "../App.css";
 import { Form, Icon, Input, Button, Checkbox, Alert } from "antd";
 import { Redirect} from "react-router-dom";
+import Header from "./header";
 const FormItem = Form.Item;
 
 class LoginForm extends React.Component {
@@ -47,8 +48,9 @@ class LoginForm extends React.Component {
 		}
 		const { getFieldDecorator } = this.props.form;
 		return (
-      	<Form onSubmit={this.handleSubmit} className="login-form" id = "components-form-demo-normal-login">
-			<h1> LOGIN </h1>
+			<div>
+				<Header/>
+      	<Form onSubmit={this.handleSubmit} className="login-form" style={{marginTop: 100}} id = "components-form-demo-normal-login">
 			<FormItem>
 				{getFieldDecorator("username", {
 					rules: [{ required: true, message: "Please input your username!" }]
@@ -83,6 +85,7 @@ class LoginForm extends React.Component {
 					htmlType="submit"
 					className="login-form-button"
 					id = "components-form-demo-normal-login"
+					style={{background: "#007BFF",border: "none"}}
 				>
 					Log in
 				</Button>
@@ -96,6 +99,7 @@ class LoginForm extends React.Component {
           showIcon	
         /></div>) : <div></div>}
 		</Form>
+		</div>
     );
   }
 }

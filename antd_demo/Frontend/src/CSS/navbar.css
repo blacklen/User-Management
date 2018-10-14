@@ -1,0 +1,63 @@
+
+.Nav {
+    position: absolute;
+    left: 4%;
+    top: 15%;
+    z-index: 3;
+  }
+
+  .img {
+      position: relative;
+      height: 450px
+  }
+  
+  .loveImage {
+    width:100px;
+    height:100px;
+    transition: 1s
+  }
+
+  .loveImage:hover {
+    width: 150px;
+    height: 150px
+  }
+
+  .loveImage:hover {
+    width: 150px;
+    height: 150px
+  }
+
+  .textImage {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: -48%;
+    left: -66%;
+    /* opacity: 0; 
+    transition: 1.5s */
+  }
+
+  .textImage:hover {
+    /* opacity: 1; */
+  }
+
+  .buttonNav{
+      z-index: 5;
+  }
+  
+
+  .nav {
+      position: absolute;
+      bottom: 97%;
+      left: 130%;
+      transition: 2s;
+  }
+
+  .loveImage:hover + .nav {
+      opacity: 0;
+  }
+
+  
+
+  
+

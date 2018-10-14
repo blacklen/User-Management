@@ -55,7 +55,7 @@ class Screen extends React.Component {
 	  );
 	
     return (
-      <div id="screen">
+      <div id="screen" className="back-ground-beauty">
         <Dropdown overlay={menu} id="manage">
           <Button style={{ marginLeft: 8 }}>
             Manage <Icon type="down" />
@@ -69,7 +69,7 @@ class Screen extends React.Component {
               <p style ={{position : "absolute", bottom: "-80px" , left: "16%", fontSize: 30}}> 
                 Hello there,{name}
                 <br/>
-                What do you want?
+                  What do you want?
                 <br/>
                 <Button>Save</Button>
                 <Button onClick = {this.handleClick}>Split Cost</Button>
